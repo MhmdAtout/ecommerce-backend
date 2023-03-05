@@ -15,4 +15,14 @@ $street = $_POST["street"];
 
 $hashed = hash("sha256", $password);
 
+$query = $mysql -> prepare("SELECT * FROM `users` where username=? and email=? ");
+$query -> bind_param("ss", $username, $email);
+$query -> execute();
+$result = $query -> get_result();
+
+while($object = $result -> fetch_assoc()){
+    $data[] = $object;
+}
+
+
 ?>
