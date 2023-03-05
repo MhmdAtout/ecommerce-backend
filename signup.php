@@ -24,5 +24,19 @@ while($object = $result -> fetch_assoc()){
     $data[] = $object;
 }
 
+if(isset($data)){
+    $response = [
+        "status" => "Username or Password already associated with another account"
+    ];
+} else{
+    $query = $mysql -> prepare ("INSERT INTO `users` (first_name, last_name, username, `password`, email, phone_number, dob, country, city, street) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query -> bind_param("ssssssssss", $first_name, $last_name, $username, $hashed, $email, $phone_number, $dob, $country, $city, $street);
+    $query -> execute();
+    $response = [
+        "status" => "User added"
+    ];
+}
+
+echo json_encode($response);
 
 ?>
