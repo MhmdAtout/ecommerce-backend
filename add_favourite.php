@@ -19,7 +19,7 @@ if(isset($data)){
     $query -> bind_param("ii", $user_id, $product_id);
     if($query -> execute()){
         $response = [
-            "status" => "Removed from favourites"
+            "status" => "Removed"
         ];   
     };
 }else{
@@ -28,13 +28,9 @@ if(isset($data)){
 
     if($query -> execute()){
         $response = [
-            "status" => "Added to favourites"
+            "status" => "Added"
         ];
-    }else{
-        $response = [
-            "status" => "Removed from favourites"
-        ];
-    };
+    }
 };
 
 echo json_encode($response);
