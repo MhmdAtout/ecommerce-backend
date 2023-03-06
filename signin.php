@@ -8,13 +8,14 @@ if(isset($_POST["user_id"])){
     $query = $mysql -> prepare("SELECT * FROM `users` Where user_id = ? ");
     $query -> bind_param("i", $user_id);
     $query -> execute();
+    $result = $query->get_result();
 
     while($object = $result -> fetch_assoc()){
         $data = $object;
     }
 
     $response = [
-        "data" => $data
+        "user" => $data
     ];
 }else{
     $credentials = $_POST["credentials"];
